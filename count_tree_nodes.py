@@ -5,19 +5,38 @@ class TreeNode:
         self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
+
+        def left_height(node:TreeNode) :
+            ht = 0
+            while node :
+                ht += 1
+                node = node.left
+            return ht
         
-        counter = 0
+        def righ_height(node : TreeNode) :
+            ht = 0
+            while node :
+                ht += 1
+                node = node.right
+            return ht
         
-        def visit (node : TreeNode) :
-            nonlocal counter
-            if node != None :
-                counter += 1
-                visit(node.left)
-                visit(node.right)
+        def totalnodes (node : TreeNode) :
+            if node == None :
+                return 0
             
-            return counter
+            lht = left_height(node)
+            rht = righ_height(node)
+
+            if lht == rht :
+                return (1 << lht) -1
+            
+            return 1 + totalnodes(node.left) + totalnodes(node.right)
         
-        return visit(root)
+        return totalnodes(root)
+
+        
+        
+        
 
         
 
