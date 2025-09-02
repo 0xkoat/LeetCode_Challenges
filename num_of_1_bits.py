@@ -1,15 +1,11 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
-        power = 0
-        while 2**(power)<= n :
-            power += 1   
-        power -= 1
-
+        a = bin(n)[2:]
         counter = 0
-        sum = 0
-        for i in range (power , -1 , -1) :
-            if (sum + 2**i) <= n :
-                sum += 2**i
+        for i in range (0,len(a)) :
+            if ((int(a[i])) & (int(a[i]))) == 1 :
                 counter += 1
-         
         return counter
+ 
+     
+        
