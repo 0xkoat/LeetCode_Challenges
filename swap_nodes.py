@@ -4,18 +4,17 @@ class ListNode:
         self.next = next
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
-        temporary_node = {}
+        temporary_node = None
         result = ListNode()
         temp = result
         while head != None and head.next != None :
-            temporary_node.update({1: head })
             head = head.next
             temp.next = head
             temp = temp.next
             head = head.next
-            temp.next = temporary_node[1]
+            temp.next = temporary_node
             temp = temp.next
-            temporary_node = {}
+            temporary_node = None
 
         if head != None :
             temp.next = head
