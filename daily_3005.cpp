@@ -1,34 +1,31 @@
 #include <vector>
-#include <map>
-#include <set>
+#include <unordered_map>
 #include <algorithm>
+using namespace std;
 class Solution
 {
 public:
     int maxFrequencyElements(vector<int> &nums)
     {
+        unordered_map<int, int> found_nums;
 
-        std::map<int, int> found_nums;
-        std::sort(nums.begin(), nums.end());
-        int candidate = nums[0];
-        int counter = 1;
-
-        for (int i = 1; i < nums.size(); i++)
+        for (int i = 0; i < nums.size(); i++)
         {
-            if (nums[i] == candidate)
+            found_nums[nums[i]]++;
+        }
+        int maxfreq = 0;
+        for (auto &p : found_nums)
+        {
+            maxfreq = max(maxfreq, p.second);
+        }
+        int count = 0;
+        for (auto &p : found_nums)
+        {
+            if (p.second == maxfreq)
             {
-                counter++;
-            }
-            else
-            {
-                found_nums[counter] += 1;
-                candidate = nums[i];
-                counter = 1;
+                count++;
             }
         }
-        found_nums[counter] += 1;
-
-        int largestkey = (--found_nums.end())->first;
-        return largestkey * found_nums[largestkey];
-    }
+        return maxfreq * count;
+    };
 };
